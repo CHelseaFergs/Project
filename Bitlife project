@@ -44,9 +44,7 @@ public class Bitlife {
         int occur = (int) ((Math.random() * 12) + 1) ;
         System.out.print(events.remove(occur)) ;
     }
-    }
-
-
+}
 
 
 
@@ -106,32 +104,7 @@ public class Work extends Bitlife {
                 System.out.println("Yikes. You've been demoted, buddy. Any more and you'll be fired!");
             }
         }
-        }
     }
-
-    public void die(boolean unalive) {
-        List<String> dumbwaystodiework = Arrays.asList("") ;
-        int death = (int) ((Math.random() * 12) + 1) ;
-        System.out.println(death) ;
-        unalive = true ;
-    }
-
-    public void workevents() {
-        List<String> wes = Arrays.asList();
-        promote(false);
-        int occur = (int) ((Math.random() * 12) + 1) ;
-        String thing = wes.remove(occur) ;
-        if (thing.equals("death")) {
-            die(false) ;
-    }
-        else {
-            Scanner response = new Scanner(System.in) ;
-            System.out.println("type the indicated number ") ;
-        }
-
-}
-
-
 
 import java.util.* ;
 import java.util.Scanner;
@@ -197,6 +170,7 @@ public class House extends Bitlife  {
 
 
 import java.util.Scanner ;
+
 public class Main {
     public static void main(String[] args) {
         boolean dead = false ;
@@ -224,7 +198,7 @@ public class Main {
                 while (leavehome == false) {
                     System.out.print("Your status is " + home.status()) ;
                     life.leave(leavehome) ;
-                    home.housevents() ;
+//                    home.housevents() ;
                 }
             }
             if (loc == 3) {
