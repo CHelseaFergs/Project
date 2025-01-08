@@ -1,0 +1,262 @@
+import java.util.* ;
+import java.util.Scanner ;
+public class Bitlife {
+    public int happiness ;
+    public String type ;
+
+
+    public boolean leave(boolean whatever){
+        Scanner exit = new Scanner(System.in) ;
+        System.out.print("Press 1 if you're SURE. Press 2 if you want to stay. ");
+        int didleave = Integer.parseInt(exit.nextLine()) ;
+        if (didleave == 1) {
+            whatever = true ;
+        }
+        if (didleave == 2) {
+            whatever = false ;
+        }
+        return whatever ;
+    }
+
+    public String status() {
+        String stat = "" ;
+        int num = (int) ((Math.random() * 3) + 1);
+        if (num == 1) {
+            stat = "existing" ;
+        }
+        if (num == 2) {
+            stat = "existential crisis" ;
+        }
+        if (num == 3) {
+            stat = "live laugh love" ;
+        }
+        return(stat) ;
+    }
+
+    public void die(boolean unalive) {
+        List<String> dumbwaystodielife = Arrays.asList("") ;
+        int death = (int) ((Math.random() * 12) + 1) ;
+        System.out.println(death) ;
+        unalive = true ;
+    }
+    public void events() {
+        List<String> events = Arrays.asList();
+        int occur = (int) ((Math.random() * 12) + 1) ;
+        System.out.print(events.remove(occur)) ;
+    }
+    }
+
+
+
+
+
+import java.util.* ;
+
+public class Work extends Bitlife {
+    int promotion = 0;
+    int demotion = 0;
+
+    public String status() {
+        String stat = "";
+        int num = (int) ((Math.random() * 3) + 1);
+        if (num == 1) {
+            stat = "working";
+
+        }
+        if (num == 2) {
+            stat = "networking";
+        }
+        if (num == 3) {
+            stat = "on break";
+        }
+        return (stat);
+    }
+
+
+    public void promote(boolean only) {
+        if (only) {
+            int promoter = (int) ((Math.random() * 6) - 1);
+            promotion += promoter;
+        } else {
+            int promoter = (int) ((Math.random() * 6) - 1) ;
+            promotion += promoter ;
+            if (promoter < 0) {
+                happiness -= 1;
+                demotion += 1;
+            } else {
+                happiness += promotion;
+            }
+        }
+    }
+
+    public void makemoney() {
+        promote(false);
+        if (promotion == 0) {
+            System.out.print("You had a regular day of work. No promotion or demotion. You currently make $16 an hour. Let's go minimum wage!");
+        } else if (demotion >= 1) {
+            if (promotion == 1) {
+                System.out.print("Working your way back up I see!!");
+            } else if (demotion <= 0) {
+                System.out.print("Good work.. You now make $20. Working your way up!");
+            } else if (promotion >= 2) {
+                System.out.print("Nice! A whoppin' $28 an hour. Call you butter because you're on a roll!");
+            } else if (promotion < -2) {
+                System.out.print("You're fired!");
+            } else if (promotion < 0) {
+                System.out.println("Yikes. You've been demoted, buddy. Any more and you'll be fired!");
+            }
+        }
+        }
+    }
+
+    public void die(boolean unalive) {
+        List<String> dumbwaystodiework = Arrays.asList("") ;
+        int death = (int) ((Math.random() * 12) + 1) ;
+        System.out.println(death) ;
+        unalive = true ;
+    }
+
+    public void workevents() {
+        List<String> wes = Arrays.asList();
+        promote(false);
+        int occur = (int) ((Math.random() * 12) + 1) ;
+        String thing = wes.remove(occur) ;
+        if (thing.equals("death")) {
+            die(false) ;
+    }
+        else {
+            Scanner response = new Scanner(System.in) ;
+            System.out.println("type the indicated number ") ;
+        }
+
+}
+
+
+
+import java.util.* ;
+import java.util.Scanner;
+
+public class House extends Bitlife  {
+    public String status() {
+        String stat = "" ;
+        int num = (int) ((Math.random() * 3) + 1);
+        if (num == 1) {
+            stat = "lounging" ;
+        }
+        if (num == 2) {
+            stat = "entertainment" ;
+        }
+        if (num == 3) {
+            stat = "sleeping" ;
+        }
+        return(stat) ;
+    }
+
+    public void die(boolean unalive) {
+        List<String> dumbwaystodiehome = Arrays.asList("") ;
+        int death = (int) ((Math.random() * 12) + 1) ;
+        System.out.println(death) ;
+        unalive = true ;
+    }
+    public void activities(){
+        Scanner task = new Scanner(System.in) ;
+        System.out.println("Would you like to\n1)watchTV\n2)eat\n3)End your life\n4)read") ;
+        Scanner hap = new Scanner(System.in) ;
+        System.out.println("Would you like todo this\n1)with family\n2)alone") ;
+        int hapi = Integer.parseInt(hap.nextLine()) ;
+        int choice = Integer.parseInt(task.nextLine()) ;
+        if (choice == 1) {
+            if (hapi == 1) {
+                happiness += 3 ;
+            }
+            else {
+                happiness += (int) ((Math.random() * 4) - 2) ;
+            }
+        }
+        if (choice == 2) {
+
+        }
+        if (choice == 3) {
+        }
+        if (choice == 4){
+            die(false) ;
+        }
+    }
+
+    public void houseevents() {
+        List<String> hes = Arrays.asList("");
+        int occur = (int) ((Math.random() * 12) + 1) ;
+        System.out.print(hes.remove(occur)) ;
+    }
+
+
+
+}
+
+
+
+
+import java.util.Scanner ;
+public class Main {
+    public static void main(String[] args) {
+        boolean dead = false ;
+        Bitlife life = new Bitlife() ;
+        System.out.println("You are now born~ Happy living! ") ;
+        while (!dead) {
+            System.out.println("Your status is " + life.status()) ;
+            life.events() ;
+            Scanner location = new Scanner(System.in) ;
+            System.out.println("Would you like to\n1)work\n2)go home\n3)End your life") ;
+            int loc = Integer.parseInt(location.nextLine()) ;
+            if (loc == 1 ){
+                Work job = new Work() ;
+                boolean leavework = false ;
+                while (leavework == false) {
+                    System.out.println("Your status is " + job.status()) ;
+                    life.leave(leavework) ;
+                    job.workevents();
+
+                }
+            }
+            if (loc == 2) {
+                House home = new House() ;
+                boolean leavehome = false ;
+                while (leavehome == false) {
+                    System.out.print("Your status is " + home.status()) ;
+                    life.leave(leavehome) ;
+                    home.housevents() ;
+                }
+            }
+            if (loc == 3) {
+                boolean die = true ;
+                life.leave(true) ;
+                life.die(dead) ;
+
+            }
+        }
+        int heaven = (int) ((Math.random() * 2) + 1) ;
+        boolean ascend = false ;
+        int count = 0 ;
+        while ((ascend = false) & (count < 2)) {
+
+            if (heaven == 1) {
+                ascend = true;
+                System.out.print("You have lived a good life. You make it to heaven! Lit");
+            }
+            if (heaven == 2) {
+                System.out.print("It seems you were a bit of a trouble maker. Say your last words as the firey pits of hell consume you.");
+                Scanner fin = new Scanner(System.in);
+                System.out.print("any last words? ");
+                int finalwords = (int) ((Math.random() * 2) + 1) ;
+                if (finalwords == 2) {
+                    System.out.println("Your final words have shown true valience and a life well spent. We have reconsidered you for heaven.") ;
+                }
+                if (finalwords == 1) {
+                    System.out.println("Life got better when you died.") ;
+                }
+                count = count + 1 ;
+            }
+            System.out.print("Thanks for playing") ;
+        }
+    }
+}
