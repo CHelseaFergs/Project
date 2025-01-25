@@ -4,20 +4,7 @@ import java.lang.Math;
 public class Bitlife {
     int happiness = 0;
     public String type;
-
-
-    public boolean leave(boolean whatever) {
-        Scanner exit = new Scanner(System.in);
-        System.out.print("Press 1 if you're SURE. Press 2 if you want to stay. ");
-        int didleave = Integer.parseInt(exit.nextLine());
-        if (didleave == 1) {
-            whatever = true;
-        }
-        if (didleave == 2) {
-            whatever = false;
-        }
-        return whatever;
-    }
+    public boolean dead;
 
     public String status() {
         String stat = "";
@@ -33,29 +20,60 @@ public class Bitlife {
         }
         return (stat);
     }
+ public void heavensequence() {
+        int heaven = (int) ((Math.random() * 2) + 1) ;
+        boolean ascend = false ;
+        int count = 0 ;
+        while ((ascend == false) & (count < 2)) {
 
-    public void die(boolean unalive) {
-        List<String> dumbwaystodielife = Arrays.asList("Your body is slowly taken by the sea after a hard jerk over the rail of the Staten Island ferry", "You ate too many dum dums. That's how you died dum dum", "Thinking you'd have a Flynn Ryder oment you jumped out of a tree and mounted a wild horse... A very hungry and anrgy wild horse");
-        int death = (int) ((Math.random() * 3) + 1);
-        System.out.println(dumbwaystodielife.get(death));
-        unalive = true;
+            if (heaven == 1) {
+                ascend = true;
+                System.out.print("You have lived a good life. You make it to heaven! Lit");
+            }
+            if (heaven == 2) {
+                System.out.println("It seems you were a bit of a trouble maker. Say your last words as the firey pits of hell consume you.");
+                Scanner fin = new Scanner(System.in);
+                System.out.println("any last words? ");
+                String end = fin.nextLine();
+                int finalwords = (int) ((Math.random() * 2) + 1) ;
+                if (finalwords == 2) {
+                    System.out.println("Your final words have shown true valience and a life well spent. We have reconsidered you for heaven.") ;
+                }
+                if (finalwords == 1) {
+                    System.out.println("Life got better when you died.") ;
+                    break ;
+                }
+                count = count + 1 ;
+            }
+        }
+ }
+            
+        public void die() {
+            List<String> dumbwaystodielife = Arrays.asList("Your body is slowly taken by the sea after a hard jerk over the rail of the Staten Island ferry", "You ate too many dum dums. That's how you died dum dum", "Thinking you'd have a Flynn Ryder moment you jumped out of a tree and mounted a wild horse... A very hungry and anrgy wild horse");
+            int death = (int) ((Math.random() * 3) + 1);
+            System.out.println(dumbwaystodielife.get(death));
+            heavensequence() ;
     }
 
     public void events() {
         List<String> events = Arrays.asList("Awwwwww. You helped your niece study for the spelling bee. #coolunc", "You finished your degree in computer science. #speedrunningjoblessness", "You attended your high school reunion. #Let'sgoBrooklynTechnicalHighSchool", "You failed your drivers test. #keepemofftheroads", "You nearly fell for a scam called.#gullible", "You decided to start training for the marathon. #speedy", "You fought with your best friend #oppterritory", "You inherited money from your dead grandfather. #rip", "You win a gift card giveaway from your favorite restaurant #Weats", "You spend four hours crying at the therapists office this week #debbiedowner", "You run into a gang in an alleyway. You lose the fight #blackeye", "You run into a gang in an alleyway. You win #squareup", "death");
-        System.out.print(events) ;
-        int occur = (int) ((Math.random() * 1) + 1) ;
+        int occur = (int) ((Math.random() * 12) + 1) ;
         String thing = events.get(occur);
         if (thing.equals("death")) {
-            die(false);
+            die();
         } else {
             System.out.print(thing) ; }
-//    }
-//    public int getHappiness() {
-//        return(happiness) ;
-//    }
+
     }
+    
+   
 }
+
+
+
+
+
+
 
 
 
@@ -81,79 +99,33 @@ public class Work extends Bitlife {
         return (stat);
     }
 
+   
 
-    public void promote(boolean only) {
-        if (only) {
-            int promoter = (int) ((Math.random() * 6) - 3);
-            promotion += promoter;
-        } else {
-            int promoter = (int) ((Math.random() * 6) + 1) ;
-            promotion += promoter ;
-            if (promoter < 0) {
-                happiness -= 1;
-                demotion += 1;
-            } else {
-                happiness += promotion;
-            }
-        }
-    }
-
-    public void makemoney() {
-        promote(false);
-        if (promotion == 0) {
-            System.out.print("You had a regular day of work. No promotion or demotion. You currently make $16 an hour. Let's go minimum wage!");
-        } else if (demotion >= 1) {
-            if (promotion == 1) {
-                System.out.print("Working your way back up I see!!");
-            } else if (demotion <= 0) {
-                System.out.print("Good work.. You now make $20. Working your way up!");
-            } else if (promotion >= 2) {
-                System.out.print("Nice! A whoppin' $28 an hour. Call you butter because you're on a roll!");
-            } else if (promotion < -2) {
-                System.out.print("You're fired!");
-            } else if (promotion < 0) {
-                System.out.println("Yikes. You've been demoted, buddy. Any more and you'll be fired!");
-            }
-        }
-    }
-    public boolean leave(boolean whatever) {
-        Scanner exit = new Scanner(System.in);
-        System.out.print("Press 1 if you're SURE. Press 2 if you want to stay. ");
-        int didleave = Integer.parseInt(exit.nextLine());
-        if (didleave == 1) {
-            whatever = true;
-        }
-        if (didleave == 2) {
-            whatever = false;
-        }
-        return whatever;
-    }
-
-    public void die(boolean unalive) {
+    public void die() {
         List<String> dumbwaystodiework = Arrays.asList("You challenge your coworker to a duel. You took the first shot but your gun wasn't loaded.", "You were singing too loudly in the coworker karaoke. A bee flew into your throat and you choked", "You drink a sample of lemonade that was being handed out while on break. The seller poisoned it and took all your money.") ;
         int death = (int) ((Math.random() * 3) + 1) ;
         System.out.println(dumbwaystodiework.get(death)) ;
-        unalive = true ;
+        heavensequence() ;
     }
 
     public void workevents() {
         List<String> wes = Arrays.asList("You go on a group trip with your friends and work remotely. Your boss is impressed with your diligence on leave.", "You vacation and completely ignore your work. You get demoted.", "You punch your boss in the face. You’re fired!!", "You blow up at your boss and get demoted","You wish your boss a happy anniversary and show great customer service", "You are late to work one too many times. Demoted", "You innovate something that will seriously improve the company. You get a promotion!!", "death" );
-        promote(false);
         int occur = (int) ((Math.random() * 7) + 1);
         String thing = wes.get(occur);
         if (thing.equals("death")) {
-            die(false);
-        } else {
+            die();
+        } 
+        else {
             System.out.print(thing) ;
-            if ((occur == 1) || (occur == 5) || (occur == 7)) {
-                promote(false) ;
-            }
-            else {
-                promote(true) ;
-            }
+            
         }
     }
 }
+
+
+
+
+
 
 import java.util.* ;
 import java.util.Scanner;
@@ -174,73 +146,30 @@ public class House extends Bitlife  {
         return(stat) ;
     }
 
-    public void die(boolean unalive) {
+    public void die() {
         List<String> dumbwaystodiehome = Arrays.asList("You get trapped in the pull-out matress of your couch and suffocate.", "You accidently chop your fingers with the knife", "The police knock on the door because they got the wrong house. You die in jail. " ) ;
-        int death = (int) ((Math.random() * 3) + 1) ;
+        int death = (int) ((Math.random() * 3)) ;
         System.out.println(dumbwaystodiehome.get(death)) ;
-        unalive = true ;
+        heavensequence() ;
     }
-    public void activities(){
-        Scanner task = new Scanner(System.in) ;
-        System.out.println("Would you like to\n1)watchTV\n2)eat\n3)End your life\n4)read") ;
-        Scanner hap = new Scanner(System.in) ;
-        System.out.println("Would you like todo this\n1)with family\n2)alone") ;
-        int hapi = Integer.parseInt(hap.nextLine()) ;
-        int choice = Integer.parseInt(task.nextLine()) ;
-        if (choice == 1) {
-            if (hapi == 1) {
-                happiness += 3 ;
-            }
-            else {
-                happiness += (int) ((Math.random() * 4) - 2) ;
-            }
-        }
-        if (choice == 2) {
-            if (hapi == 1) {
-                happiness += 6 ;
-            }
-            else {
-                happiness += (int) ((Math.random() * 4) - 2) ;
-            }
-        }
-        if (choice == 4) {
-            if (hapi == 2) {
-                happiness += 4 ;
-            }
-            else {
-                happiness += (int) ((Math.random() * 4) - 2) ;
-            }
-        }
-        if (choice == 3){
-            die(false) ;
-        }
-    }
+    
 
     public void housevents() {
-        List<String> hes = Arrays.asList("You force your wife to have a home birth. She now suffers from internal bleeding.", "You forget to pick your kids up from school and make dinner", "You read your kids a bedtime story.", "You get a call from your mom. Dad is out of teh hospital!", "death");
-        int occur = (int) ((Math.random() * 5) + 1);
+        List<String> hes = Arrays.asList("You force your wife to have a home birth. She now suffers from internal bleeding.", "You forget to pick your kids up from school and make dinner", "You read your kids a bedtime story.", "You get a call from your mom. Dad is out of the hospital!", "death");
+        int occur = (int) ((Math.random() * 5));
         String thing = hes.get(occur);
         if (thing.equals("death")) {
-            die(false);
+            die();
         } else {
             System.out.print(thing);
 
         }
     }
-        public boolean leave(boolean whatever) {
-            Scanner exit = new Scanner(System.in);
-            System.out.print("Press 1 if you're SURE. Press 2 if you want to stay. ");
-            int didleave = Integer.parseInt(exit.nextLine());
-            if (didleave == 1) {
-                whatever = true;
-            }
-            if (didleave == 2) {
-                whatever = false;
-            }
-            return whatever;
-        }
 
     }
+
+
+
 
 
 
@@ -254,6 +183,7 @@ public class Main {
         while (!dead) {
             System.out.println("Your status is " + life.status()) ;
             life.events() ;
+            System.out.println("") ;
             Scanner location = new Scanner(System.in) ;
             System.out.println("Would you like to\n1)work\n2)go home\n3)End your life") ;
             int loc = Integer.parseInt(location.nextLine()) ;
@@ -262,49 +192,38 @@ public class Main {
                 boolean leavework = false ;
                 while (leavework == false) {
                     System.out.println("Your status is " + job.status()) ;
-                    life.leave(leavework) ;
                     job.workevents();
+                    System.out.println("") ;
+                    Scanner readywork = new Scanner(System.in) ;
+                    System.out.println("Would you like to leave work? press 1 if yes, press 2 if no. ") ;
+                    int prepwork = Integer.parseInt(readywork.nextLine()) ;
+                    if (prepwork == 1) {
+                        leavework = true ;
+                    }
+    
                 }
             }
             if (loc == 2) {
                 House home = new House() ;
                 boolean leavehome = false ;
                 while (leavehome == false) {
-                    System.out.print("Your status is " + home.status()) ;
-                    life.leave(leavehome) ;
+                    System.out.println("Your status is " + home.status()) ;
                     home.housevents() ;
+                    System.out.println("") ;
+                    Scanner readyhome = new Scanner(System.in) ;
+                    System.out.println("Would you like to leave home? press 1 if yes, press 2 if no. ") ;
+                    int prephome = Integer.parseInt(readyhome.nextLine()) ;
+                    if (prephome == 1) {
+                        leavehome = true ;
+                    }
                 }
             }
             if (loc == 3) {
-                boolean die = true ;
-                life.leave(true) ;
-                life.die(dead) ;
+                life.die() ;
+                dead = true ;
 
             }
         }
-        int heaven = (int) ((Math.random() * 2) + 1) ;
-        boolean ascend = false ;
-        int count = 0 ;
-        while ((ascend = false) & (count < 2)) {
-
-            if (heaven == 1) {
-                ascend = true;
-                System.out.print("You have lived a good life. You make it to heaven! Lit");
-            }
-            if (heaven == 2) {
-                System.out.print("It seems you were a bit of a trouble maker. Say your last words as the firey pits of hell consume you.");
-                Scanner fin = new Scanner(System.in);
-                System.out.print("any last words? ");
-                int finalwords = (int) ((Math.random() * 2) + 1) ;
-                if (finalwords == 2) {
-                    System.out.println("Your final words have shown true valience and a life well spent. We have reconsidered you for heaven.") ;
-                }
-                if (finalwords == 1) {
-                    System.out.println("Life got better when you died.") ;
-                }
-                count = count + 1 ;
-            }
-            System.out.print("Thanks for playing") ;
+            System.out.print("\nThanks for playing") ;
         }
     }
-}
